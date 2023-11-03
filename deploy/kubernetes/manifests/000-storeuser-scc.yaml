@@ -1,0 +1,53 @@
+---
+kind: SecurityContextConstraints
+apiVersion: security.openshift.io/v1
+metadata:
+  name: portale-marghe-scc-storeuser
+  labels:
+    backstage.io/kubernetes-id: portale-marghe
+    app.kubernetes.io/name: portale-marghe
+    rht-gitops.com/janus-argocd: portale-marghe
+allowHostPID: false
+allowHostNetwork: false
+allowPrivilegeEscalation: true
+allowHostDirVolumePlugin: false
+allowHostIPC: false
+readOnlyRootFilesystem: false
+allowHostPorts: false
+allowPrivilegedContainer: false
+runAsUser:
+  type: MustRunAs
+  uid: 10001
+seLinuxContext:
+  type: RunAsAny
+fsGroup:
+  type: RunAsAny
+supplementalGroups:
+  type: RunAsAny
+users:
+  - system:serviceaccount:portale-marghe:storeuser-sa
+---
+kind: SecurityContextConstraints
+apiVersion: security.openshift.io/v1
+metadata:
+  name: portale-marghe-scc-storeuseradmin
+  annotations:
+    backstage.io/kubernetes-id: portale-marghe
+allowHostPID: false
+allowHostNetwork: false
+allowPrivilegeEscalation: true
+allowHostDirVolumePlugin: false
+allowHostIPC: false
+readOnlyRootFilesystem: false
+allowHostPorts: false
+allowPrivilegedContainer: false
+runAsUser:
+  type: RunAsAny
+seLinuxContext:
+  type: RunAsAny
+fsGroup:
+  type: RunAsAny
+supplementalGroups:
+  type: RunAsAny
+users:
+  - system:serviceaccount:portale-marghe:storeuseradmin-sa
